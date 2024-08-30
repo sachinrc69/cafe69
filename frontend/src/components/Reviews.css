@@ -1,0 +1,31 @@
+.reviewsCont {
+  background-color: white;
+  border: 1px solid black;
+  border-radius: 10px;
+  padding: 15px;
+  text-align: center;
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.card-body p {
+  text-align: left;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.second {
+  width: 350px;
+  background-color: white;
+  border-radius: 4px;
+  box-shadow: 10px 10px 5px #aaaaaa;
+}
+.text1 {
+  font-size: 17px;
+  font-weight: 500;
+  color: #56575b;
+}
+.date {
+  font-size: 12px;
+}

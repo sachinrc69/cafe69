@@ -1,0 +1,56 @@
+.info {
+  margin-top: 0;
+  font-size: large;
+  border: 1px double black;
+  padding: 3px;
+  padding-left: 6px;
+  border-radius: 5px;
+  height: auto;
+  overflow: auto;
+}
+.infoLabel {
+  font-weight: 700;
+  font-size: 20px;
+  margin-bottom: 0;
+}
+
+.paymentDetails {
+  display: flex;
+  flex-direction: column;
+}
+.expiry,
+.cvc {
+  border-top: 0;
+  width: 50%;
+}
+
+.modal-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.alternatePayment {
+  /* border-top: 1px solid black; */
+  /* margin-top: 5px;
+  padding-top: 25px; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.upiToggleBtn {
+  padding: 5px 10px;
+}
+
+.upiImageCont {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+}
+
+.upiImage {
+  margin-bottom: 10px;
+  height: 150px;
+}

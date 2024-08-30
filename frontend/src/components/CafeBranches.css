@@ -1,0 +1,52 @@
+.branchHeader {
+  width: 100%;
+  padding: 3rem 10rem;
+  text-align: left;
+  font-family: "CS Gordon Serif", serif;
+  color: blue;
+}
+
+.branchesInfo {
+  width: 100%;
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.branch {
+  margin-bottom: 2rem;
+}
+
+.branchImg img {
+  height: auto;
+  max-height: 400px;
+  border-radius: 3%;
+  box-shadow: 0 0 5px 0px black;
+  width: 100%;
+}
+
+.branchImg {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.branchInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  justify-content: center;
+}
+
+@media (max-width: 768px) {
+  .branchImg img {
+    max-height: 300px;
+  }
+
+  .branchInfo {
+    align-items: center;
+    text-align: center;
+  }
+}
