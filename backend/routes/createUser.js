@@ -26,7 +26,7 @@ router.post(
       const result = await User.findOne({ email: req.body.email });
       if (result) throw gerenateError("user already exists", 404);
 
-      const salt = await bcrypt.genSalt(10);
+      const salt = await bcrypt.genSalt(process.env.SALT);
       let secPassword = await bcrypt.hash(req.body.password, salt);
       const user = new User({
         name: req.body.name,
@@ -35,7 +35,7 @@ router.post(
         location: req.body.location,
       });
       await user.save().then((result) => {
-        const jwtSecret = "qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq";
+        const jwtSecret = process.env.JWT_KEY;
         const data = {
           user: {
             id: result._id,
@@ -76,7 +76,7 @@ router.post(
 
       if (!cmpPassword) throw gerenateError("Incorrect passowrd", 404);
 
-      const jwtSecret = "qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq";
+      const jwtSecret = process.env.JWT_KEY;
 
       const data = {
         user: {
@@ -102,10 +102,7 @@ router.get("/getUser/:authToken", async (req, res, next) => {
     throw gerenateError("Unauthorised", 404);
   }
   try {
-    const decodedToken = jwt.verify(
-      authToken,
-      "qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq"
-    );
+    const decodedToken = jwt.verify(authToken, process.env.JWT_KEY);
 
     const user = await User.findById(decodedToken.user.id);
     if (!user) throw gerenateError("user not found", 200);
@@ -133,7 +130,7 @@ router.put(
         throw generateError("Enter right credentials", 404);
       }
 
-      const salt = await bcrypt.genSalt(10);
+      const salt = await bcrypt.genSalt(process.env.SALT);
       let secPassword = await bcrypt.hash(req.body.password, salt);
 
       const user = await User.findByIdAndUpdate(userId, {
@@ -143,7 +140,7 @@ router.put(
         location: req.body.location,
       });
       if (!user) generateError("USER UPDATE FAILED", 200);
-      const jwtSecret = "qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq";
+      const jwtSecret = process.env.JWT_KEY;
       const data = {
         user: {
           id: user.id,
