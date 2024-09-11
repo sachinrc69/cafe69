@@ -22,6 +22,7 @@ app.use((err, req, res, next) => {
   const statusCode = err.statusCode || 500;
   res.status(statusCode).json({ message: err.message });
 });
+console.log(process.env.MongoURL);
 
 app.listen(5000);
 mongoose
