@@ -10,6 +10,7 @@ const reviewRoutes = require("./routes/reviews");
 const app = express();
 app.use(express.json());
 app.use(cors());
+require("dotenv").config();
 
 app.use("/menu", menuRoutes);
 app.use("/user", userRoutes);
@@ -24,9 +25,7 @@ app.use((err, req, res, next) => {
 
 app.listen(5000);
 mongoose
-  .connect(
-    "mongodb+srv://foodie:foodie69@cluster0.qg3g4yf.mongodb.net/foodie?retryWrites=true&w=majority"
-  )
+  .connect(process.env.MongoURL)
   .then(() => {
     console.log("connectd to mongo ");
   })

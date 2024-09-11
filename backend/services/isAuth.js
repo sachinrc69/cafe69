@@ -7,7 +7,7 @@ module.exports = isAuth = (req, res, next) => {
       throw generateError("not authorized", 401);
     }
     const token = bearer.split(" ")[1];
-    const match = jwt.verify(token, "qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq");
+    const match = jwt.verify(token, process.env.JWT_KEY);
     if (!match) {
       throw generateError("not authorized", 401);
     }
