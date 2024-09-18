@@ -1,11 +1,13 @@
-import React, { useRef } from "react";
+import React, { useRef, useContext } from "react";
 import { json, Link } from "react-router-dom";
 import { url } from "../url";
+import userContext from "../store/userInfo";
 
 export default function Footer({ setNewReview }) {
   const reviewRef = useRef(null);
   const authToken = localStorage.getItem("authToken");
 
+  const { user } = useContext(userContext);
   const sendReviewHandler = async () => {
     if (reviewRef.current) {
       try {
@@ -88,57 +90,42 @@ export default function Footer({ setNewReview }) {
           </a>
         </section>
 
-        {authToken && (
-          <section className="">
-            <div action="">
-              <div className="row d-flex justify-content-center">
-                <div className="col-auto">
-                  <p className="pt-2">
-                    <strong>Reviews and Suggestions are apriciated</strong>
-                  </p>
-                </div>
+        {/* {authToken && ( */}
+        <section className="">
+          <div action="">
+            <div className="row d-flex justify-content-center">
+              <div className="col-auto">
+                <p className="pt-2">
+                  <strong>Reviews and Suggestions are apriciated</strong>
+                </p>
+              </div>
 
-                <div className="col-md-5 col-12">
-                  <div data-mdb-input-init className="form-outline mb-4">
-                    <input
-                      id="form5Example24"
-                      className="form-control"
-                      onChange={(e) => {
-                        reviewRef.current = e.target.value;
-                      }}
-                    />
-                  </div>
+              <div className="col-md-5 col-12">
+                <div data-mdb-input-init className="form-outline mb-4">
+                  <input
+                    placeholder={!authToken && "Login to send suggestion"}
+                    id="form5Example24"
+                    className="form-control"
+                    onChange={(e) => {
+                      reviewRef.current = e.target.value;
+                    }}
+                  />
                 </div>
+              </div>
 
-                <div className="col-auto">
-                  <button
-                    data-mdb-ripple-init
-                    className="btn btn-outline mb-4"
-                    disabled={!authToken && true}
-                    onClick={sendReviewHandler}
-                  >
-                    Send
-                  </button>
-                </div>
-                {/* <li class="bg-white mb-3">
-                <div class="form-outline">
-                  <textarea
-                    class="form-control"
-                    id="textAreaExample2"
-                    rows="4"
-                  ></textarea>
-                  <label class="form-label" for="textAreaExample2">
-                    Message
-                  </label>
-                </div>
-              </li>
-              <button type="button" class="btn btn-info btn-rounded float-end">
-                Send
-              </button> */}
+              <div className="col-auto">
+                <button
+                  data-mdb-ripple-init
+                  className="btn btn-outline mb-4"
+                  disabled={!authToken && true}
+                >
+                  Send
+                </button>
               </div>
             </div>
-          </section>
-        )}
+          </div>
+        </section>
+        {/* )} */}
 
         <section className="mb-4">
           <p>
@@ -150,118 +137,6 @@ export default function Footer({ setNewReview }) {
             buds.
           </p>
         </section>
-
-        {/* <section className="">
-          <div className="row">
-            <div className="col-lg-3 col-md-6 mb-4 mb-md-0">
-              <h5 className="text-uppercase">Links</h5>
-
-              <ul className="list-unstyled mb-0">
-                <li>
-                  <a className="text-body" href="#!">
-                    Link 1
-                  </a>
-                </li>
-                <li>
-                  <a className="text-body" href="#!">
-                    Link 2
-                  </a>
-                </li>
-                <li>
-                  <a className="text-body" href="#!">
-                    Link 3
-                  </a>
-                </li>
-                <li>
-                  <a className="text-body" href="#!">
-                    Link 4
-                  </a>
-                </li>
-              </ul>
-            </div>
-
-            <div className="col-lg-3 col-md-6 mb-4 mb-md-0">
-              <h5 className="text-uppercase">Links</h5>
-
-              <ul className="list-unstyled mb-0">
-                <li>
-                  <a className="text-body" href="#!">
-                    Link 1
-                  </a>
-                </li>
-                <li>
-                  <a className="text-body" href="#!">
-                    Link 2
-                  </a>
-                </li>
-                <li>
-                  <a className="text-body" href="#!">
-                    Link 3
-                  </a>
-                </li>
-                <li>
-                  <a className="text-body" href="#!">
-                    Link 4
-                  </a>
-                </li>
-              </ul>
-            </div>
-
-            <div className="col-lg-3 col-md-6 mb-4 mb-md-0">
-              <h5 className="text-uppercase">Links</h5>
-
-              <ul className="list-unstyled mb-0">
-                <li>
-                  <a className="text-body" href="#!">
-                    Link 1
-                  </a>
-                </li>
-                <li>
-                  <a className="text-body" href="#!">
-                    Link 2
-                  </a>
-                </li>
-                <li>
-                  <a className="text-body" href="#!">
-                    Link 3
-                  </a>
-                </li>
-                <li>
-                  <a className="text-body" href="#!">
-                    Link 4
-                  </a>
-                </li>
-              </ul>
-            </div>
-
-            <div className="col-lg-3 col-md-6 mb-4 mb-md-0">
-              <h5 className="text-uppercase">Links</h5>
-
-              <ul className="list-unstyled mb-0">
-                <li>
-                  <a className="text-body" href="#!">
-                    Link 1
-                  </a>
-                </li>
-                <li>
-                  <a className="text-body" href="#!">
-                    Link 2
-                  </a>
-                </li>
-                <li>
-                  <a className="text-body" href="#!">
-                    Link 3
-                  </a>
-                </li>
-                <li>
-                  <a className="text-body" href="#!">
-                    Link 4
-                  </a>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </section> */}
       </div>
 
       <div
