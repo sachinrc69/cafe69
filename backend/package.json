@@ -1,4 +1,5 @@
 {
+  "proxy": "https://cafe69.vercel.app/",
   "name": "backend",
   "version": "1.0.0",
   "description": "",
