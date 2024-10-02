@@ -4,7 +4,6 @@ const User = require("../models/user");
 const { body, validationResult } = require("express-validator");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
-const gerenateError = require("../generateError");
 const generateError = require("../generateError");
 
 router.post(
@@ -20,14 +19,14 @@ router.post(
     try {
       const errors = validationResult(req);
       if (!errors.isEmpty()) {
-        throw gerenateError("Enter right credentials", 404);
+        throw generateError("Enter right credentials", 404);
       }
 
       const result = await User.findOne({ email: req.body.email });
-      if (result) throw gerenateError("user already exists", 404);
+      if (result) throw generateError("user already exists", 404);
 
       const salt = await bcrypt.genSalt(process.env.SALT);
-      let secPassword = await bcrypt.hash(req.body.password, salt);
+      let secPassword = bcrypt.hashSync(req.body.password, salt);
       const user = new User({
         name: req.body.name,
         password: secPassword,
@@ -64,17 +63,17 @@ router.post(
     try {
       const errors = validationResult(req);
       if (!errors.isEmpty())
-        throw gerenateError("Enter right credentials", 404);
+        throw generateError("Enter right credentials", 404);
 
       const result = await User.findOne({ email: req.body.email });
-      if (!result) throw gerenateError("User does not exist", 404);
+      if (!result) throw generateError("User does not exist", 404);
 
       const cmpPassword = bcrypt.compareSync(
         req.body.password,
         result.password
       );
 
-      if (!cmpPassword) throw gerenateError("Incorrect passowrd", 404);
+      if (!cmpPassword) throw generateError("Incorrect passowrd", 404);
 
       const jwtSecret = process.env.JWT_KEY;
 
@@ -99,13 +98,13 @@ router.post(
 router.get("/getUser/:authToken", async (req, res, next) => {
   const authToken = req.params.authToken;
   if (!authToken) {
-    throw gerenateError("Unauthorised", 404);
+    throw generateError("Unauthorised", 404);
   }
   try {
     const decodedToken = jwt.verify(authToken, process.env.JWT_KEY);
 
     const user = await User.findById(decodedToken.user.id);
-    if (!user) throw gerenateError("user not found", 200);
+    if (!user) throw generateError("user not found", 200);
 
     res.status(200).json({ user: user, message: "found user successfully" });
   } catch (error) {
