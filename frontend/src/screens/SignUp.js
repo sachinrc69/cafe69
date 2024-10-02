@@ -129,20 +129,13 @@ export default function SignUp() {
                         </div>
                       </div>
 
-                      <div className="form-check d-flex justify-content-center mb-5">
-                        <label className="form-check-label" for="form2Example3">
-                          I agree all statements in{" "}
-                          <a href="#!">Terms of service</a>
-                        </label>
-                      </div>
-
                       <div
                         className="d-flex justify-content-center mx-4 mb-3 mb-lg-4 "
                         style={{ gap: "10px" }}
                       >
                         <button
                           type="submit"
-                          className="btn btn-primary btn-lg"
+                          className="btn btn-primary btn-lg mb-4"
                         >
                           {currentPath === "/user/edituser"
                             ? "Save"
