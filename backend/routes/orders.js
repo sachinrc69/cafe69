@@ -73,8 +73,8 @@ router.post("/payment", isAuth, async (req, res, next) => {
       payment_method_types: ["card"],
       line_items: lineItems,
       mode: "payment",
-      success_url: "http://localhost:3000/success",
-      cancel_url: "https://localhost:3000/cancel",
+      success_url: "https://cafe69-frontend.vercel.app/success",
+      cancel_url: "https://cafe69-frontend.vercel.app/cancel",
     });
 
     const response = await Order.create({
