@@ -25,8 +25,10 @@ router.post(
       const result = await User.findOne({ email: req.body.email });
       if (result) throw generateError("user already exists", 404);
 
-      const salt = await bcrypt.genSalt(process.env.SALT);
-      let secPassword = bcrypt.hashSync(req.body.password, salt);
+      const saltRounds = parseInt(process.env.SALT, 10);
+
+      const salt = await bcrypt.genSalt(saltRounds);
+      let secPassword = await bcrypt.hash(req.body.password, salt);
       const user = new User({
         name: req.body.name,
         password: secPassword,
