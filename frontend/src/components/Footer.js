@@ -118,6 +118,7 @@ export default function Footer({ setNewReview }) {
                   data-mdb-ripple-init
                   className="btn btn-outline mb-4"
                   disabled={!authToken && true}
+                  onClick={sendReviewHandler}
                 >
                   Send
                 </button>
